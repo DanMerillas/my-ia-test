@@ -11,7 +11,7 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [inputTextImage, setinputTextImage] = useState("");
   const [loading, setLoading] = useState(false);
-
+console.log(process.env.REACT_APP_API_KEY)
 
   async function fetchData() {
     setLoading(true)
