@@ -5,14 +5,14 @@ export default function LoadingSpinner() {
     return (
         <>
 
-            <div className="spinner-container">
-                <div className="loading-spinner">
+            <div className="spinner-container text-center">
+                <div className="loading-spinner" style={{marginLeft:'44%', marginTop:'100px'}}>
 
                 </div>
 
             </div>
-            <p>
-                Esperando respuesta del servidor
+            <p className="mt-3" style={{marginLeft:'42%'}}>
+                Cargando...
             </p>
         </>
     );
