@@ -11,9 +11,9 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [inputTextImage, setinputTextImage] = useState("");
   const [loading, setLoading] = useState(false);
-console.log(process.env.REACT_APP_API_KEY)
 
   async function fetchData() {
+    setResponseImagen({})
     setLoading(true)
     const res = await fetch("https://api.openai.com/v1/completions", {
       method: "POST",
@@ -35,6 +35,7 @@ console.log(process.env.REACT_APP_API_KEY)
   }
 
   async function fetchDataImagen() {
+    setResponse('')
     setLoading(true)
     const res = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
@@ -73,10 +74,10 @@ console.log(process.env.REACT_APP_API_KEY)
       <input type={'text'} onChange={(e) => setInputText(e.target.value)} onKeyDown={handleKeyDown} /><input type={'button'} value="Enviar" onClick={fetchData} />
       {response !== "" && <><h1>Repuesta:</h1><p>{response}</p></>}
 
-      <h1>Genera imagenes:</h1>
+      <h1>Genera imágenes:</h1>
       <input type={'text'} onChange={(e) => setinputTextImage(e.target.value)} onKeyDown={(handleKeyDownImagen)}/><input type={'button'} value="Enviar" onClick={fetchDataImagen} />
       {responseImagen.length > 0 && <><h1> Imagen:</h1>
-      {responseImagen.map((i:any)=><p><img alt='' src={responseImagen.url} /></p>)}
+      {responseImagen.map((i:any)=><p><img alt='' src={i.url} /></p>)}
       </>}
       </>}
     </div>
