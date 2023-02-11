@@ -7,7 +7,7 @@ import LoadingSpinner from './LoadingSpinner';
 function App() {
 
   const [response, setResponse] = useState("");
-  const [responseImagen, setResponseImagen] = useState("");
+  const [responseImagen, setResponseImagen] = useState<any>({});
   const [inputText, setInputText] = useState("");
   const [inputTextImage, setinputTextImage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,13 +44,13 @@ console.log(process.env.REACT_APP_API_KEY)
       },
       body: JSON.stringify({
         prompt: inputTextImage,
-        n: 1,
+        n: 4,
         size: "512x512"
       })
     });
     const data = await res.json();
     setLoading(false)
-    setResponseImagen(data.data[0].url);
+    setResponseImagen(data.data);
   }
 
   const handleKeyDown = (event:any)=>{
@@ -75,7 +75,9 @@ console.log(process.env.REACT_APP_API_KEY)
 
       <h1>Genera imagenes:</h1>
       <input type={'text'} onChange={(e) => setinputTextImage(e.target.value)} onKeyDown={(handleKeyDownImagen)}/><input type={'button'} value="Enviar" onClick={fetchDataImagen} />
-      {responseImagen !== "" && <><h1> Imagen:</h1><img alt='' src={responseImagen} /></>}
+      {responseImagen.length > 0 && <><h1> Imagen:</h1>
+      {responseImagen.map((i:any)=><p><img alt='' src={responseImagen.url} /></p>)}
+      </>}
       </>}
     </div>
   );
